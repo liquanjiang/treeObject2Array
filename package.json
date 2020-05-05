@@ -1,0 +1,22 @@
+{
+  "name": "tree-object2array",
+  "version": "1.2.0",
+  "description": "树形结构对象与数组之间的互相转换",
+  "main": "index.js",
+  "typings": "./index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "keywords": [
+    "tree2array",
+    "树形对象转数组",
+    "数组转树形对象"
+  ],
+  "author": "liquanjiang",
+  "license": "ISC",
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "ramda": "^0.27.0"
+  }
+}
