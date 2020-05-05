@@ -6,6 +6,7 @@
  * 4.每个元素根据其id和parentId建立父子或祖先与后代的关系
  *
  */
+
 import * as R from 'ramda'
 import Map from 'core-js/modules/es.map'
 
@@ -47,7 +48,7 @@ const util: Util = {
     // 遍历后将得到一个Map，这个Map所有的key都是数组元素的ID，而value则是对应的object
 
     // 遍历tempMap对象，将当前的节点与其父节点简历链接
-    tempMap.forEach((value, IDKey, map) => {
+    tempMap.forEach((value: any, IDKey: string, map: Map) => {
       const pID = value[parentIDKey]
       if (pID === 'root' || !pID) {
         treeObject[IDKey] = value

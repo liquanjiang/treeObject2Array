@@ -1,4 +1,12 @@
 "use strict";
+/**
+ * 将一个具有树形结构属性的数组转为树形对象
+ * 1.数组中的结构拥有唯一的id
+ * 2.数组中的结构有parentID
+ * 3.如果parendID为空或undefined则视为根元素
+ * 4.每个元素根据其id和parentId建立父子或祖先与后代的关系
+ *
+ */
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -10,14 +18,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * 将一个具有树形结构属性的数组转为树形对象
- * 1.数组中的结构拥有唯一的id
- * 2.数组中的结构有parentID
- * 3.如果parendID为空或undefined则视为根元素
- * 4.每个元素根据其id和parentId建立父子或祖先与后代的关系
- *
- */
 var R = __importStar(require("ramda"));
 var es_map_1 = __importDefault(require("core-js/modules/es.map"));
 var util = {
