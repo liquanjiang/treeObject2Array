@@ -94,7 +94,7 @@ const util: Util = {
     outArray.push(obj)
 
     // 如果这个对象有children且children长度大于0，则递归调用处理方法
-    if (children && children.length > 0) {
+    if (children && Array.isArray(children) && children.length > 0) {
       children.forEach((item: any) => {
         outArray = outArray.concat(util.transformTree2Array(item, IDKey, parentIDKey, obj[IDKey]))
       })
