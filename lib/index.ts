@@ -9,10 +9,11 @@
 
 import * as R from 'ramda'
 import Map from 'core-js/modules/es.map'
+import Array from 'core-js/es/array'
 
 interface Util {
   // 将数组转化为树形结构对象的方法
-  transformArray2Tree: (Array: any[], IDKey: string, parentIDKey: string) => object;
+  transformArray2Tree: (array: any[], IDKey: string, parentIDKey: string) => object;
   // 将树形结构的对象，转为扁平化的数组，数组包含所有的元素及其子元素
   transformTree2Array: (TreeObject: any, IDKey: string, parentIDKey: string, rootID: string) => any[];
 }
@@ -22,15 +23,15 @@ const util: Util = {
 
   /**
    * 将数组转化为树形结构对象的方法
-   * @param Array
+   * @param array
    * @param IDKey
    * @param parentIDKey
    * @return object
    *
    */
 
-  transformArray2Tree(Array, IDKey = 'id', parentIDKey = 'parent_id') {
-    if (!Array || Array.length === 0) {
+  transformArray2Tree(array, IDKey = 'id', parentIDKey = 'parent_id') {
+    if (!array || !Array.isArray(array) || array.length === 0) {
       console.error('数组不存在或为空')
       return {}
     }
@@ -41,7 +42,7 @@ const util: Util = {
     const treeObject: any = {}
 
     // 遍历数组，根据IDKey获取每个元素
-    Array.forEach((item) => {
+    array.forEach((item) => {
       tempMap.set(item[IDKey], item)
     })
 
@@ -54,7 +55,7 @@ const util: Util = {
         treeObject[IDKey] = value
       } else {
         const parent = map.get(pID)
-        if (parent.children === undefined) {
+        if (!Array.isArray(parent.children)) {
           parent.children = []
         }
         parent.children.push(value)
@@ -76,7 +77,7 @@ const util: Util = {
    */
 
   transformTree2Array: function (TreeObject, IDKey = 'id', parentIDKey = 'parent_id', parentID = '') {
-    if (!TreeObject) {
+    if (!TreeObject || typeof TreeObject !== 'object' || Array.isArray(TreeObject)) {
       console.error('请输入树形对象，若无将返回空数组')
       return []
     }

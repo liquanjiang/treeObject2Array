@@ -1,6 +1,6 @@
 {
   "name": "tree-object2array",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "树形结构对象与数组之间的互相转换",
   "main": "index.js",
   "typings": "./index.d.ts",

@@ -20,19 +20,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var R = __importStar(require("ramda"));
 var es_map_1 = __importDefault(require("core-js/modules/es.map"));
+var array_1 = __importDefault(require("core-js/es/array"));
 var util = {
     /**
      * 将数组转化为树形结构对象的方法
-     * @param Array
+     * @param array
      * @param IDKey
      * @param parentIDKey
      * @return object
      *
      */
-    transformArray2Tree: function (Array, IDKey, parentIDKey) {
+    transformArray2Tree: function (array, IDKey, parentIDKey) {
         if (IDKey === void 0) { IDKey = 'id'; }
         if (parentIDKey === void 0) { parentIDKey = 'parent_id'; }
-        if (!Array || Array.length === 0) {
+        if (!array || !array_1.default.isArray(array) || array.length === 0) {
             console.error('数组不存在或为空');
             return {};
         }
@@ -41,7 +42,7 @@ var util = {
         // 创建需要需要返回的树形对象
         var treeObject = {};
         // 遍历数组，根据IDKey获取每个元素
-        Array.forEach(function (item) {
+        array.forEach(function (item) {
             tempMap.set(item[IDKey], item);
         });
         // 遍历后将得到一个Map，这个Map所有的key都是数组元素的ID，而value则是对应的object
@@ -53,7 +54,7 @@ var util = {
             }
             else {
                 var parent_1 = map.get(pID);
-                if (parent_1.children === undefined) {
+                if (!array_1.default.isArray(parent_1.children)) {
                     parent_1.children = [];
                 }
                 parent_1.children.push(value);
@@ -75,7 +76,7 @@ var util = {
         if (IDKey === void 0) { IDKey = 'id'; }
         if (parentIDKey === void 0) { parentIDKey = 'parent_id'; }
         if (parentID === void 0) { parentID = ''; }
-        if (!TreeObject) {
+        if (!TreeObject || typeof TreeObject !== 'object' || array_1.default.isArray(TreeObject)) {
             console.error('请输入树形对象，若无将返回空数组');
             return [];
         }
